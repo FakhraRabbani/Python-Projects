@@ -1,0 +1,87 @@
+We are gonna learn how to process spreadsheets. This is extremely valuable in situations where u have hundreds or thousands of spreadsheets that need to be updated.
+If u do it by hand, it might take hours or days, weeks or even months.
+You can simply build a python program in less than half an hour.
+And have the python program, automatically process thousands of spreadsheets in under one second.
+We are going to work on excel spreadsheet.
+
+In the spreadsheet, we have three columns, transaction ID, product ID and price
+In this spreadsheet, we are going to record all kinds of transactions.
+But lets say we have an error, it could be a human error or a system error. The price that we have is wrong.
+Lets say we need to decrease this by 10 percent.
+If u want to do this manually, it will be tedious if u have thousands of rows.
+
+We are going to write a python prgrm that will do this for us.
+Its going to automate this process. It will also add a chart.
+Our python prgrm is going to do all of this in a matter of seconds.
+
+First on top, we need to import the openpyxl package -> import openpyxl
+We can give it an alias to make our code shorter, so as xl. This is not required but it just makes our code a little bit cleaner.
+Now instead of typing openpyxl. We can type xl. Thats an alias for this package.
+
+In this package, we have a function for loading xl workbook. So lets call load_workbook and as an argument we pass transaction.sxlsx
+This will load aur excel workbook and return a workbook object.
+
+In our transactions file, we only have one sheet. We can access that using square brackets and specifying the name of sheet which is Sheet1. This is case-sensitive.
+This returns our sheet.
+
+In this sheet, we have various cells.
+We need to learn how to access a particular cell.
+In pycharm , with this sheet object, u can use square brackets and give the coordinate of a cell.
+Coordinate is combination of the column and the row like a1.
+sheet['a1'] returns our first cell.
+There is also another approach of getting a cell.
+Instead of using square brackets with a string, we can use the cell method of sheet object and u pass the row and column.
+
+Now we need to iterate over all the rows and for each row, we need to get the value in third column which is the price column.
+We will get that and then multiply by 0.9.
+
+First we need to know how many rows we have in the spreadsheet. We can get that from the sheet object -> sheet.max_row
+In this sheet we have 4 rows.
+So we need to add a for...loop that will generate the numbers 1-4. We are gonna use a range function to generate a range of numbers, starting from 1, all the way to sheet.max_row + 1.
+The reason we are adding 1 is that this range function will generate numbers from starting value all the way to this second value but it will not include the second value.
+range(1, 4) -> 1, 2, 3
+range(1, 4 + 1) -> 1, 2, 3, 4
+Thats why -> range(1, sheet.max_row + 1)
+
+Now we can get the cells in third column. However we dont want the first row cell which is the heading.
+So we will start our range function from 2.
+
+Now we are gonna use sheet.cell to get access to the row and column should be three -> sheet.cell(row, 3)
+We get the values of the third column.
+
+Now we need to multiply each value by 0.9 to get correct price.
+Then we need to add a new column to overwrite the values in the column.
+So using the same method, we need to get reference of the cell in given row but in fourth column -> sheet.cell(row, 4)
+After that we need to set value for the cell
+
+Ater doing this, lets save the file by calling save method.
+We dont want to accidently overwrite the original file in case our prgrm has a bug. So lets save it in a new file. and lets call that new file transactions2.xlsx
+
+After this, we need to add a chart.
+To add a chart, we need to add a couple of classes on the top. So, after the import statement
+Type from openpyxl.chart import BarChart, Reference
+In this openpyxl package, we have a module called chart and from this module we are importing two classes, bar chart and reference.
+
+Now before saving our workbook, lets add chart to current sheet.
+First we need to select a range of values. I am going to select values from the 4th column. So all values from row 2 to 4 and in colmn 4
+These are the values i am going to use in our chart.
+
+After our for loop, we are going to use the reference class to select a range of values.
+The first argument in the constructor is sheet. We pass our sheet here, then we add four keyword arguments.
+The first one is min_row, we set this to 2. The second one is max_row, we set this to maximum row in this sheet that is sheet.max_row.
+We want to select the cells in row 2 to 4.
+Reference(sheet, min_row=2, max_row = sheet.max_row). This is going to select all the cells in these rows, all the columns. This is not what we want.
+We only want the values in the fourth column.
+So we need to add two more arguments min_col = 4, max_col = 4.
+We are creating an instance of the reference class. So lets store the result in a variable called values.
+This values object will have all the values in fourth column.
+
+Now we are ready to create a chart.
+So we create an instance of bar chart and store it in chart object.
+
+Then we call chart.add_data() and pass oue values.
+Finally we add this chart to sheet, so we call sheet.add_chart() and pass this chart object. We should also specify where we want to add this chart.
+Lets say we want to add it on row 2 after fourth column, coordinate of this cell is e2 and this is going to be top left corner of our chart.
+
+# Now the code we have written in app.py is not organized. we dont have any functions.
+So lets organize it in organize_app.py

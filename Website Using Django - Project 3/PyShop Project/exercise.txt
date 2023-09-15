@@ -1,0 +1,21 @@
+1. Modify django website such that when we navigate to products/new, we will see page with new products
+
+# Solution
+In products app, open up views module
+In this module, we define a new function.
+Then we need to map this new function to url, so open up url module in product app and add another url pattern
+http://127.0.0.1:8000/products/new -> in browser we can see new product msg
+
+
+
+
+2. U want to have a concept of offering discount. I want to create a new module for offer.
+In this class, we should have 3 attributes -> code (VCA2142), description (textual field -> 20 % off all products), discount(floating point no -> 0.2)
+Create this module, then create migration and update database.
+
+# Solution
+In modules model, right after Product class, i am gonna define a new Class Offer and add attribues.
+After creating Offer Class, we need to do migration.
+So open terminal and run -> python manage.py makemigrations
+After this run -> python manage.py migrate
+Then drag and drop your db.sqlite3 again in database, u can see in products app, u will have productsoffer

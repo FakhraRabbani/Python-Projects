@@ -1,0 +1,196 @@
+# Installing Django and creating pyshop
+To intsall django, open terminal and type pip install django or pip install --default-timeout=100 django
+To create a project in django -> django-admin startproject pyshop .
+
+A pyshop directory or package has been added now
+webserver gateway interface -> wsgi folder, urls folder-> what to show to users
+Outside of pyshop folder, we have manage.py. We use this module to manage django project.
+
+Again go to terminal and type python manage.py runserver
+http://127.0.0.1:8000/  If we go to this server, we can see otur first django project
+
+
+
+
+
+
+# Creating first App
+This django project we created can ahve multiple apps
+We divide django project into multiple apps. Each app is focused on one function area.
+
+Open terminal window and type python manage.py startapp products
+After this we get a new folder products. In it we have subfolder of mmigrations. We have init.py, so product is a package
+admin module defines how administration panel of the app will look like
+apps.py is used to store various configuration settings.
+models.py is where we define new classes or types
+tests.py is where we write automated tests
+views module is where we define what should the user see when we navigate to certain page.
+
+
+
+
+
+
+# View Functions
+How to create first view function in django?
+A view function is basically a function that is called with django when the user navigates to particular page
+For eg when we go to http://127.0.0.1:8000/products, our browser sends an http request for webserver.
+Django takes that request and inspects the url or address.
+The job of view function is to return the response to the browser oor the user client.
+So this function should generate some html markup to return  to the client.
+
+Open up the views module.
+
+# views.py
+Define a new function, lets call it index. Name convention to say it index for main page.
+View functions take a paramter that is http request
+On the top, we need to import Httpresponse from django.http, With this HttpResponse class we can create http response to return to browser or client.
+In view function, we return http response object (an instance of the class).
+def index(request):
+    return HttpResponse('Hello World')
+
+
+
+
+# URL Mapping
+This view function should be called when we send a request.
+We need to tell django that whenever there is call to ..../products, call index function
+We need to map this url https...../products to index function
+Go to products folder and add new python file call it urls
+In ths urls module, by convention, we need to define a variable called urlpatterns
+We set urlspatterns to list object.
+In this list we map various urls with view function.
+To refernce url, we need to import path function
+from django.urls import path
+With this path function, we can map the url to new function
+So we call path function. First argument is string that specifies our url. Here we pass empty string becuase its the roor
+If we send request to /products -> its on the root
+If we send to /products/1/detail or products/new
+All urls start with /products
+If we take away /products, we are left with nothing. Thats why we use an empty string here.
+In second argument, we need to specify view function. First we need to import views module to urls modeul
+Period means current folder so from . import views
+
+
+
+
+
+
+# Now we need to tell django about products app
+Open up the pyshop folder.
+In this folder we have another urls module and its like root of parent url module in django project.
+Open it
+We can see a list and its calling path function
+We are telling any url that starts with admin, navigate it to admin.site.urls
+In this module, we should also tell django about our products app
+So lets add another object to this list. So we call path function and tell django that if path or any url that starts with products/ , deligate them to the products app
+We need to import include function as well.
+path('products/', include('products.url'))
+
+
+
+# Head over to browser and type /products next to url   http://127.0.0.1:8000/products
+We can see helloworld msg there
+
+
+
+
+# Models in Django project
+Model is representation of real-world concept.
+Lets create our first model.
+In product app, open up models module.
+In this module, we are gonna create a new class called Product. We need to inherit this class from models class in django
+CharField contains textual data
+FloatField -> Floating point numbers
+
+
+
+
+
+
+# Migrations
+We have a file db.sqlite3. This is an empty data base file that django creates and we use this to store our data.
+sqlite is kind of database. It is only suitable for small applications.
+Search on google for db browser for sqlite, download it
+Open new database and u can see db.sqlite file there. We dont have any tables yet.
+We can add tables.
+Open terminal and type -> python manage.py makemigrations
+We get this msg -> No changes detected
+We get this msg because bydefault django doesnt know about our django model.
+To solve this prblm, go back to project, open pyshop, open settings module
+There is a variable called INSTALLED_APPS, lets register our product app here
+Inside producst app, go to apps module and see it.
+Back to settings module, add 'products.apps.ProductsConfig'
+Now django knows about our products aoo
+Open terminal and type -> python manage.py makemigrations
+We get ->  products\migrations\0001_initial.py
+Inside our migrations folder, we have this module with this sequence no
+Go back to terminal , we need to run migration to genertae table
+python manage.py migrate -> run it
+Now reload db.sqlite file in database browser, now we have tables
+Now run python manage.py migrate  ->  No migrations to apply.
+
+
+
+
+
+# Admin
+Administration panel of django
+In browser, if u head over to /admin ->http://127.0.0.1:8000/admin, we get login page
+Now we need to create first user of pycharm lets call it superuser
+On terminal -> python manage.py createsuperuser
+Then it asks for username lets type admin, then we need to enter email address, write it, then enter a password 1234
+Superuser created successfully.
+Now in browser, lets login
+We get admininstartion panel, we can manage the groups and users.
+
+
+Lets have a look at settings module. In it we have django.contrib.admin which is responsible for generating the view we are seeing on browser
+Now we can only manage groups and users
+
+But we can also manage products.
+Open products folder in which we have module admin and in this module we register the things we want to manage in admin section
+First we need to import our product model -> from .models import Product
+Then admin.site.register(Product)
+We are using admin object. This object has an attribute site which is an objct itself. This site has a method called register. We call this method and pass in our Product class.
+Django will manage our projects in the admin area.
+Now if we go back and refresh our page, we see new table of Products
+Then add a new product and save it
+
+
+
+
+
+# Customizing the Admin
+In admin.py, we need to create a new class caled ProductAdmin,  we should inherit this class from admin.ModelAdmin
+In the body, we can overwrite things.
+In admin module, import the Offer class
+Then create a new class of OfferAdmin and set list_display. Then register offer and offer admin.
+Now if we refresh the home page, we see the offers. Lets add offers as we have none.
+
+
+
+
+
+# Templates
+How to replace Helloworld with our products?
+Open up the views module in products.
+First step is to get the product stored in database and then format it using some html template
+First import Product class in views module
+Then we get all product objects
+In products, add a new directory and by convention lets call it templates.
+Inside this templates folder, add a new file index.html and add some html in it.
+Then we need to return html to client.
+So in views module, change return statement. We call render function to render the template
+Now we want to replace items.
+So back to views module, in render function, we need to pass a dictionary of products key and value. Then we need to go to index.html and replcae items with products
+Now back in browser, we can see our products
+Now lets also add product price
+
+
+
+# Adding Bootstap
+# Rendering Cards
+
+# Final Touches
+Adding nav bar etc from bootstrap

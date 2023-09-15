@@ -1,0 +1,28 @@
+A machine learning project involves a number of steps.
+
+1. Import the Data: It often comes in the form of a csv file. You might have a database with lots of data, we can simply export that data and store it in a csv file for the purpose of machine learning project.
+So, we import the data.
+
+2. Clean the Data: It involves tasks such as removing duplicated data. If u have duplicates in the data, we dont want to feed this to the model because otherwise our model will learn bad patterns in our data and produce wrong results.
+So, we should make sure that our input data is in a good and clean shape. If there is data that is irrelevant we should remove them, if there are duplicates or incomplete we can remove or modify them.
+If our data is text-based like name of countries, or genres of music, or cats and dogs, we need to convert them to numerical values.
+So, this step really depends on the kinds of data we are working with, every project is different.
+
+3. Split the Data into training/Test Sets: We need to split the data into two segments. One for training model and the other for testing it to make sure our model produces the right result.
+For eg, if u have 1000 pics of cats and dogs, we can reserve 80% for training, and another 20% for testing.
+
+4. Create a Model: This involves selecting an algorithm to analyze the data. There are so many machine learning algorithms out there such as decision trees, neural networks and so on.
+Each algorithm have pros and cons in terms of accuracy and performance, so the algorithm u use, depends on the kind of problem you are trying to solve and your input data.
+We dont have to explicitly program an algorithm, there are libraries out there that provide these algorithms
+One of the most popular one is SIDE KICK LEARN.
+So we build a model using an algorithm, next we need to train our model.
+
+5. Train the Model: So we feed it our training data. Our model will then look for the patterns in the data.
+
+6. Make predictions: We can ask our model that is this a cat or a dog and our model will make prediction.
+Now the prediction is not always accurate infact when u start out, its very likely ur predictions are inaccurate.
+
+7. Evaluate and improve:  We need to evaluate the predictions and measure the accuracy.
+Then we go back to our model and either select a diff algorithm that is going to produce a more accurate result for the kind of prblm we are trying to solve.
+Or fine tune the parameters of our model.
+So eaach algorithm has parameters that we can modify to optimize the accuracy.

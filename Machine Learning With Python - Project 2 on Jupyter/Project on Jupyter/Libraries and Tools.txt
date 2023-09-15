@@ -1,0 +1,20 @@
+# Libraries
+1. Numpy: It provides a multidimensional array.
+
+2. Pandas: Data analysis library that provides a concept called data frame. Data frame is a two-dimensional data structure similar to an excel spreadsheet.
+So we have rows and columns. We can select columns in a row or a column or a range of rows and columns.
+
+3. MatPlotLib: It is a two-dimensional plotting library for creating graphs on plots.
+
+4. Scikit-Learn: It provides all the common algorithms like decision trees, neural networks and so on.
+
+
+
+
+Now when working with machine learning projects, we use an environment called jupiter for writing our code, technically we can still use vs code or any other code editor, but these editors are not ideal for machine learning projects, because we need to frequently inspect data and thats really hard in environments like vs code and terminal.
+If u are working with a table of 10 or 20 columns visualizing this data in a terminal window is really difficult and messy.
+Thats why we use jupiter.
+Jupiter makes easy to inspect our data.
+
+To install jupiter, we need to use a platform called anaconda.
+Head over to Anaconda.com/download

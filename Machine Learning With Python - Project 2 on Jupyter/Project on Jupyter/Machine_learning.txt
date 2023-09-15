@@ -1,0 +1,18 @@
+Imagine i ask u to write a program to scan an image, and tell if its a cat or a dog.
+If u want to build this prgrm using traditional programming techniques, ur program is going to get overly complex.
+You will have to come up with lots of rules to come up with specific curves, edges and colors in an image to tell if its a cat or dog.
+But if i give you a black and white photo, ur rules may not work, they may break. Then u would have to rewrite the.
+Or i may give u a pic of cat or a dog from different angle that we did not predict before.
+So solving this prblm using traditional programming techniques is going to get overly complex or sometimes impossible.
+What if i ask u to extend this prgrm such that it supports 3 kinds of animals, Cats, dogs and horses.
+Once agin u will have to rewrite all those rules.
+Thats not going to work.
+
+So machine learning is a technique to solve these kinds of prblms
+We build a model or an engine and give it lots and lots of data.
+For eg, we give it thousands or tens of thousands of pictures of cats and dogs.
+Our model will then find and learn patterns and the input data, so we can give it a new pic of a cat that we havet seen before.
+And ask it, is it a cat or dog or a horse and it will tell us with a certain level of accuracy.
+The more input data we give it, the more accurate our model is going to be.
+
+Machine learning has other applications in self driving cars, robotics, language processing, vision processing, forecasting things like stock market trends and the weather, games and so on.

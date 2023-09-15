@@ -1,0 +1,15 @@
+Imagine we have an online music store. When user signs up, we asked our age and gender, and based on their profile you recommend various music albums they are likely to buy.
+So in this project, you want to use machine learning to increase sales. 
+So we want to build a model, we feed this model with some sample data, based on existing users.
+Our model will learn the patterns in our data, so we can ask it to make predictions.
+When a new user signs up, we tell our model, hey we have a new user with this profile, what is the kind of music that this user is interested in. Our model will say jazz or hiphop or whatever, and based on that we can make suggestions to the user.
+So this is the prblm we are going to solve. 
+
+Steps:
+1. Import Data
+2. Clean the Data
+3. Split the Data into Training / Test Sets
+4. Create a model
+5. Train the model
+6. Make predictions
+7. Evaluate and improve
